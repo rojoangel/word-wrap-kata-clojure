@@ -3,5 +3,6 @@
   (:use [word.core]))
 
 (facts "about wrap"
-       (fact "wraps nil as string"
-             (wrap nil 10) => ""))
+       (fact "wraps empty as empty"
+             (wrap nil 10) => ""
+             (wrap "" 10) => ""))
