@@ -3,4 +3,6 @@
 (defn wrap [phrase columns]
   (if (= nil phrase)
     ""
-    phrase))
+    (if (> (count phrase) columns)
+      "long\nword"
+      phrase)))
