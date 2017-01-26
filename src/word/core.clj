@@ -7,7 +7,10 @@
     (if (> (count phrase) columns)
       (let [whitespace-pos (string/index-of phrase " ")]
         (if whitespace-pos
-          "word\nword"
+          (string/join
+            (cons (subs phrase 0 whitespace-pos)
+                  (cons "\n"
+                        (subs phrase (inc whitespace-pos)))))
           (string/join
             (cons (subs phrase 0 columns)
                   (cons "\n"
