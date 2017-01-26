@@ -14,5 +14,6 @@
              (wrap "verylongword" 4) => "very\nlong\nword")
        (fact "wraps multiple words by using whitespaces"
              (wrap "word word" 6) => "word\nword"
-             (wrap "wrap here" 6) => "wrap\nhere"))
+             (wrap "wrap here" 6) => "wrap\nhere"
+             (wrap "word word word" 6) => "word\nword\nword"))
 

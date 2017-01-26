@@ -10,7 +10,7 @@
           (string/join
             (cons (subs phrase 0 whitespace-pos)
                   (cons "\n"
-                        (subs phrase (inc whitespace-pos)))))
+                        (wrap (subs phrase (inc whitespace-pos)) columns))))
           (string/join
             (cons (subs phrase 0 columns)
                   (cons "\n"
