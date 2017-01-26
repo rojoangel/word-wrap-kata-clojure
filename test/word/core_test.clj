@@ -10,4 +10,5 @@
              (wrap "word" 10) => "word")
        (fact "wraps a long word by splitting it"
              (wrap "longword" 4) => "long\nword"
-             (wrap "longerword" 6) => "longer\nword"))
+             (wrap "longerword" 6) => "longer\nword"
+             (wrap "verylongword" 4) => "very\nlong\nword"))

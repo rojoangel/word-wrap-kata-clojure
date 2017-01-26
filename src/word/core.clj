@@ -5,5 +5,8 @@
   (if (= nil phrase)
     ""
     (if (> (count phrase) columns)
-      (string/join (cons (subs phrase 0 columns) (cons "\n" (subs phrase columns))))
+      (string/join
+        (cons (subs phrase 0 columns)
+              (cons "\n"
+                    (wrap (subs phrase columns) columns))))
       phrase)))
