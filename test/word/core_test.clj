@@ -11,4 +11,7 @@
        (fact "wraps a long word by splitting it"
              (wrap "longword" 4) => "long\nword"
              (wrap "longerword" 6) => "longer\nword"
-             (wrap "verylongword" 4) => "very\nlong\nword"))
+             (wrap "verylongword" 4) => "very\nlong\nword")
+       (fact "wraps multiple words by using whitespaces"
+             (wrap "word word" 6) => "word\nword"))
+
