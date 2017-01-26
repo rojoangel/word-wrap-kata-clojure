@@ -17,5 +17,7 @@
              (wrap "wrap here" 6) => "wrap\nhere"
              (wrap "word word word" 6) => "word\nword\nword")
        (fact "wraps multiple words over the limit by the last whitespace"
-             (wrap "word word word" 11) => "word word\nword"))
+             (wrap "word word word" 11) => "word word\nword")
+       (fact "wraps two words by using the whitespace when matches columns"
+             (wrap "word word" 4) => "word\nword"))
 

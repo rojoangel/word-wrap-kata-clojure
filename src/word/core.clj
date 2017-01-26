@@ -11,7 +11,7 @@
     (if (= nil phrase)
       ""
       (if (> (count phrase) columns)
-        (let [whitespace-pos (string/last-index-of phrase " " (dec columns))]
+        (let [whitespace-pos (string/last-index-of phrase " " columns)]
           (if whitespace-pos
             (break-between phrase whitespace-pos (inc whitespace-pos))
             (break-between phrase columns columns)))
