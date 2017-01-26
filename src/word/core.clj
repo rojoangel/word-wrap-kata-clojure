@@ -2,17 +2,17 @@
   (:require [clojure.string :as string]))
 
 (defn wrap [phrase columns]
-  (if (= nil phrase)
-    ""
-    (if (> (count phrase) columns)
-      (let [whitespace-pos (string/index-of phrase " ")]
-        (if whitespace-pos
+  (let [break-between
+        (fn [phrase start end]
           (string/join
-            (cons (subs phrase 0 whitespace-pos)
+            (cons (subs phrase 0 start)
                   (cons "\n"
-                        (wrap (subs phrase (inc whitespace-pos)) columns))))
-          (string/join
-            (cons (subs phrase 0 columns)
-                  (cons "\n"
-                        (wrap (subs phrase columns) columns))))))
-      phrase)))
+                        (wrap (subs phrase end) columns)))))]
+    (if (= nil phrase)
+      ""
+      (if (> (count phrase) columns)
+        (let [whitespace-pos (string/index-of phrase " ")]
+          (if whitespace-pos
+            (break-between phrase whitespace-pos (inc whitespace-pos))
+            (break-between phrase columns columns)))
+        phrase))))
