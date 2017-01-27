@@ -10,7 +10,6 @@
                         (wrap (subs phrase end) columns)))))]
     (if (<= (count phrase) columns)
       phrase
-      (let [whitespace-pos (string/last-index-of phrase " " columns)]
-        (if whitespace-pos
-          (break-between phrase whitespace-pos (inc whitespace-pos))
-          (break-between phrase columns columns))))))
+      (if-let [whitespace-pos (string/last-index-of phrase " " columns)]
+        (break-between phrase whitespace-pos (inc whitespace-pos))
+        (break-between phrase columns columns)))))
