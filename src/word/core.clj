@@ -19,11 +19,7 @@
     (if (fits-in? phrase columns)
       (string/join (concat wrapped-phrase phrase))
       (if-let [whitespace-pos (last-whitespace-in phrase columns)]
-        (recur
-          (second (break-between phrase whitespace-pos (inc whitespace-pos)))
-          columns
-          (concat wrapped-phrase (first (break-between phrase whitespace-pos (inc whitespace-pos)))))
-        (recur
-          (second (break-between phrase columns columns))
-          columns
-          (concat wrapped-phrase (first (break-between phrase columns columns))))))))
+        (let [splitted-phrase (break-between phrase whitespace-pos (inc whitespace-pos))]
+          (recur (second splitted-phrase) columns (concat wrapped-phrase (first splitted-phrase))))
+        (let [splitted-phrase (break-between phrase columns columns)]
+          (recur (second splitted-phrase) columns (concat wrapped-phrase (first splitted-phrase))))))))
