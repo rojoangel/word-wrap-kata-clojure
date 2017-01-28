@@ -18,12 +18,12 @@
     (break-between phrase columns columns)))
 
 (defn wrap [phrase columns]
-  (loop [phrase phrase
-         columns columns
-         wrapped-phrase nil]
+  (loop [wrapped-phrase nil
+         phrase phrase
+         columns columns]
     (if (fits-in? phrase columns)
       (string/join (concat wrapped-phrase phrase))
       (let [splitted-phrase (split phrase columns)]
-        (recur (second splitted-phrase)
-               columns
-               (concat wrapped-phrase (first splitted-phrase)))))))
+        (recur (concat wrapped-phrase (first splitted-phrase))
+               (second splitted-phrase)
+               columns)))))
