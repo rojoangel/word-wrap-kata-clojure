@@ -13,8 +13,9 @@
          wrapped-phrase nil]
     (let [break-between
           (fn [phrase start end]
-            [(string/join (concat (subs phrase 0 start) "\n"))
-             (subs phrase end)])]
+            (list
+              (string/join (concat (subs phrase 0 start) "\n"))
+              (subs phrase end)))]
       (if (fits-in? phrase columns)
         (string/join (concat wrapped-phrase phrase))
         (if-let [whitespace-pos (last-whitespace-in phrase columns)]
