@@ -23,8 +23,7 @@
          wrapped-phrase nil]
     (if (fits-in? phrase columns)
       (string/join (concat wrapped-phrase phrase))
-      (if-let [whitespace-pos (last-whitespace-in phrase columns)]
-        (let [splitted-phrase (break-between phrase whitespace-pos (inc whitespace-pos))]
-          (recur (second splitted-phrase) columns (concat wrapped-phrase (first splitted-phrase))))
-        (let [splitted-phrase (break-between phrase columns columns)]
-          (recur (second splitted-phrase) columns (concat wrapped-phrase (first splitted-phrase))))))))
+      (let [splitted-phrase (split-phrase phrase columns)]
+        (recur (second splitted-phrase)
+               columns
+               (concat wrapped-phrase (first splitted-phrase)))))))
