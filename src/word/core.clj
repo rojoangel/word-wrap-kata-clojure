@@ -12,7 +12,7 @@
     (concat (subs phrase 0 start) "\n")
     (subs phrase end)))
 
-(defn- split-phrase [phrase columns]
+(defn- split [phrase columns]
   (if-let [whitespace-pos (last-whitespace-in phrase columns)]
     (break-between phrase whitespace-pos (inc whitespace-pos))
     (break-between phrase columns columns)))
@@ -23,7 +23,7 @@
          wrapped-phrase nil]
     (if (fits-in? phrase columns)
       (string/join (concat wrapped-phrase phrase))
-      (let [splitted-phrase (split-phrase phrase columns)]
+      (let [splitted-phrase (split phrase columns)]
         (recur (second splitted-phrase)
                columns
                (concat wrapped-phrase (first splitted-phrase)))))))
