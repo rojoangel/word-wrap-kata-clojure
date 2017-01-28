@@ -13,12 +13,16 @@
          wrapped-phrase nil]
     (let [break-between
           (fn [phrase start end]
-            (string/join
-              (cons (subs phrase 0 start)
-                    (cons "\n"
-                          (wrap (subs phrase end) columns)))))]
+            [(string/join (concat (subs phrase 0 start) "\n"))
+             (subs phrase end)])]
       (if (fits-in? phrase columns)
-        (string/join (cons wrapped-phrase phrase))
+        (string/join (concat wrapped-phrase phrase))
         (if-let [whitespace-pos (last-whitespace-in phrase columns)]
-          (break-between phrase whitespace-pos (inc whitespace-pos))
-          (break-between phrase columns columns))))))
+          (recur
+            (second (break-between phrase whitespace-pos (inc whitespace-pos)))
+            columns
+            (string/join (concat wrapped-phrase (first (break-between phrase whitespace-pos (inc whitespace-pos))))))
+          (recur
+            (second (break-between phrase columns columns))
+            columns
+            (string/join (concat wrapped-phrase (first (break-between phrase columns columns))))))))))
