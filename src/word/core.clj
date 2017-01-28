@@ -14,7 +14,7 @@
     (let [break-between
           (fn [phrase start end]
             (list
-              (string/join (concat (subs phrase 0 start) "\n"))
+              (concat (subs phrase 0 start) "\n")
               (subs phrase end)))]
       (if (fits-in? phrase columns)
         (string/join (concat wrapped-phrase phrase))
@@ -22,8 +22,8 @@
           (recur
             (second (break-between phrase whitespace-pos (inc whitespace-pos)))
             columns
-            (string/join (concat wrapped-phrase (first (break-between phrase whitespace-pos (inc whitespace-pos))))))
+            (concat wrapped-phrase (first (break-between phrase whitespace-pos (inc whitespace-pos)))))
           (recur
             (second (break-between phrase columns columns))
             columns
-            (string/join (concat wrapped-phrase (first (break-between phrase columns columns))))))))))
+            (concat wrapped-phrase (first (break-between phrase columns columns)))))))))
