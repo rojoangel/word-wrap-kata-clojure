@@ -12,6 +12,11 @@
     (concat (subs phrase 0 start) "\n")
     (subs phrase end)))
 
+(defn- split-phrase [phrase columns]
+  (if-let [whitespace-pos (last-whitespace-in phrase columns)]
+    (break-between phrase whitespace-pos (inc whitespace-pos))
+    (break-between phrase columns columns)))
+
 (defn wrap [phrase columns]
   (loop [phrase phrase
          columns columns
