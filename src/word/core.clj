@@ -18,7 +18,7 @@
                     (cons "\n"
                           (wrap (subs phrase end) columns)))))]
       (if (fits-in? phrase columns)
-        phrase
+        (string/join (cons wrapped-phrase phrase))
         (if-let [whitespace-pos (last-whitespace-in phrase columns)]
           (break-between phrase whitespace-pos (inc whitespace-pos))
           (break-between phrase columns columns))))))
