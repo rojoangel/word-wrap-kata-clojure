@@ -9,7 +9,7 @@
 
 (defn- break-between [phrase start end]
   (list
-    (concat (subs phrase 0 start) "\n")
+    (str (subs phrase 0 start) "\n")
     (subs phrase end)))
 
 (defn- split [phrase columns]
